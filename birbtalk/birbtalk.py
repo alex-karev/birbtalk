@@ -42,6 +42,7 @@ class BirbTalk:
                 "type": "object",
                 "properties": x.arguments,
                 "required": x.required,
+                "additionalProperties": False
             }
         ) for x in tools]
         # Initialize components
