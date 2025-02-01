@@ -1,1 +1,1 @@
-from .duckduckgo import DuckDuckGoTool, DuckDuckGoNewsTool
+from .duckduckgo import duckduckgo_tool, duckduck_news_tool
