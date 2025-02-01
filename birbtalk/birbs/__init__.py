@@ -1,1 +1,0 @@
-from .withqdrantmemory import BirbTalkWithQdrantMemory
