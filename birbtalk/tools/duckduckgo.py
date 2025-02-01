@@ -19,6 +19,19 @@ def duckduckgo(query: str, **kwargs):
         texts.append(f'Title: {x["title"]}\nSource: [{x["href"]}]({x["href"]})\nText: {x["body"]}')
     return "\n\n".join(texts)
 
+def duckducknews(keywords: str, **kwargs):
+    # Search
+    try:
+        ddgs = DDGS(proxy=PROXY.replace("socks5", "socks5h") if PROXY else None)
+        results = ddgs.news(keywords, region='wt-wt', safesearch='off', timelimit='y', max_results=MAX_RESULTS)
+    except:
+        return "Nothing found!"
+    # Format texts
+    texts = []
+    for x in results:
+        texts.append(f'Title: {x["title"]}\nSource: [{x["source"]}]({x["url"]})\nText: {x["body"]}')
+    return "\n\n".join(texts)
+
 DuckDuckGoTool = BirbTool(
     name = "web_search",
     description = "Search for information on the web",
@@ -30,4 +43,17 @@ DuckDuckGoTool = BirbTool(
         }
     },
     required = ["query"]
+)
+
+DuckDuckGoNewsTool = BirbTool(
+    name = "get_news",
+    description = "Search for news by keywords",
+    function = duckducknews,
+    arguments = {
+        "keywords": {
+            "type": "string",
+            "description": "List of keywords separated by semicolons."
+        }
+    },
+    required = ["keywords"]
 )

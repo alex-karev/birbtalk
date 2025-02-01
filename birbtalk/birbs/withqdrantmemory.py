@@ -102,7 +102,8 @@ class BirbTalkWithQdrantMemory(BirbTalk):
         self.writer = DocumentWriter(document_store=document_store, policy=DuplicatePolicy.NONE)
         self.retriever = QdrantEmbeddingRetriever(
             document_store=document_store,
-            filters=filters
+            filters=filters,
+            top_k=n_memories
         )
         # Load embedders
         self.text_embedder.warm_up()
@@ -122,8 +123,6 @@ class BirbTalkWithQdrantMemory(BirbTalk):
     def load_memory(self, query: str, chat_id: Optional[int] = None):
         query = self.text_embedder.run(text=query)["embedding"]
         documents = self.retriever.run(query_embedding=query)["documents"]
-        max_documents = min(len(documents), self.n_memories)
-        documents = documents[:max_documents]
         if documents:
             text = [f"- {x.content}" for x in documents]
             text = "\n".join(text)
