@@ -25,5 +25,6 @@ class BirbPrompt:
     workflow: Optional[List[str]] = None
     skills: Optional[List[str]] = None
     examples: Optional[List[dict[Literal["title", "text"], str]]] = None
+    data: List[dict[Literal["title", "text"], str]] = field(default_factory=[])
     init_message: Optional[str] = "As a/an <Role>, you must follow the <Rules>, you must talk to user in default <Language>."
     template: Optional[str] = langgpt

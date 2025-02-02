@@ -33,6 +33,11 @@ langgpt = """# Role: {{name}}
 {%- endfor %}
 {%- endif %}
 
+{%- for item in data %}\n\n## {{item.title}}
+
+{{item.text}}
+{%- endfor %}
+
 {%- if init_message %}\n\n## Initialization
 
 {{init_message}}
