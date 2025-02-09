@@ -1,6 +1,5 @@
 from typing import List, Optional, Literal, Callable
-from pydantic.dataclasses import dataclass
-from dataclasses import field
+from dataclasses import field, dataclass
 from .langgpt import langgpt
 
 # Dataclass for tools used by llm
